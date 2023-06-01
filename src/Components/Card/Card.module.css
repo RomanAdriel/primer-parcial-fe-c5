@@ -1,0 +1,15 @@
+.card {
+    border: 1px solid gold;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 25px;
+    align-items: center;
+    width: fit-content;
+    margin: 5% 0 0 35%;
+}
+
+span {
+    color: chocolate;
+}
