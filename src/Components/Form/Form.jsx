@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as FormStyles from './Form.module.css'
 import Card from '../Card/Card';
 
-const Form = (props) => {
+const Form = () => {
 
     const [musica, setMusica] = useState({
         genero: '',
@@ -12,6 +12,31 @@ const Form = (props) => {
     
     const [mostrarInfo, setMostrarInfo] = useState(false);
     const [mostrarError, setMostrarError] = useState(false);
+
+    const actualizarGenero = (e) => {
+
+        setMusica((prevMusica) => ({...prevMusica, genero: e.target.value}));
+        ocultarCard();
+
+    }
+
+    const actualizarBanda = (e) => {
+
+        setMusica((prevMusica) => ({...prevMusica, banda: e.target.value}));
+        ocultarCard();
+
+    }
+
+    const actualizarCantBandas = (e) => {
+
+        setMusica((prevMusica) => ({...prevMusica, cantBandas: e.target.value}));
+        ocultarCard();
+
+    }
+
+    const ocultarCard = () => {
+        setMostrarInfo(false);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,11 +60,11 @@ const Form = (props) => {
         <h1>Contanos un poco sobre tus gustos musicales</h1>
     <form onSubmit={handleSubmit}>
         <label>Género Favorito</label>
-        <input type="text" placeholder='Genero' onChange={(e) => setMusica((prevMusica) => ({...prevMusica, genero: e.target.value}))}/>
+        <input type="text" placeholder='Genero' onChange={(e) => actualizarGenero(e)}/>
         <label>Banda Favorita</label>
-        <input type="text" placeholder='Banda' onChange={(e) => setMusica((prevMusica) => ({...prevMusica, banda: e.target.value}))}/>
+        <input type="text" placeholder='Banda' onChange={(e) => actualizarBanda(e)}/>
         <label>Cantidad de Bandas que Conoce</label>
-        <input type='number' placeholder='Cantidad' onChange={(e) => setMusica((prevMusica) => ({...prevMusica, cantBandas: e.target.value}))}/>
+        <input type='number' placeholder='Cantidad' onChange={(e) => actualizarCantBandas(e)}/>
         <button type='submit'>Enviar</button>
     </form>
 
@@ -48,7 +73,7 @@ const Form = (props) => {
         <> <Card cardContent={musica}/> </> : null}
     {mostrarError ? 
         <>
-            <h2 className={FormStyles.error}>Alguno de los datos ingresados no es válido.</h2>
+            <h2 className={FormStyles.error}>Por favor chequea que la información sea correcta.</h2>
         </> : null}
     </div>
   )
